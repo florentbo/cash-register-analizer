@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class RegisterApplication implements CommandLineRunner {
 
     @Autowired
-    RegisterRepository repository;
+    RegisterOrderRepository registerOrderRepository;
     
     public static void main(String[] args) {
         SpringApplication.run(RegisterApplication.class);
@@ -19,12 +19,12 @@ public class RegisterApplication implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         System.out.println("Orders found with findAll():");
         System.out.println("-------------------------------");
-        for (RegisterOrder order : repository.findAll()) {
+        for (RegisterOrder order : registerOrderRepository.findAll()) {
             System.out.println(order);
+            for (RegisterOrderDetail registerOrderDetail : order.getDetails()) {
+                System.out.println(registerOrderDetail.getProduct().getName());
+            }
         }
-        System.out.println();
-
-
     }
 
 }
