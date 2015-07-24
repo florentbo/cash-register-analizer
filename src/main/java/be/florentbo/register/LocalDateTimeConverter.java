@@ -1,4 +1,4 @@
-package hello;
+package be.florentbo.register;
 
 
 import javax.persistence.AttributeConverter;

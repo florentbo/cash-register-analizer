@@ -1,4 +1,4 @@
-package hello;
+package be.florentbo.register;
 
 import javax.persistence.*;
 
@@ -19,12 +19,19 @@ public class RegisterOrderDetail {
     @JoinColumn(name="productid", nullable=false, updatable=false)
     private Item product;
 
+    @Column(name="aantal")
+    private long quantity;
+
     public RegisterOrder getRegisterOrder() {
         return registerOrder;
     }
 
     public Item getProduct() {
         return product;
+    }
+
+    public long getQuantity() {
+        return quantity;
     }
 }
 

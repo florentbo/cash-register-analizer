@@ -1,4 +1,4 @@
-package hello;
+package be.florentbo.register;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -22,7 +22,10 @@ public class RegisterApplication implements CommandLineRunner {
         for (RegisterOrder order : registerOrderRepository.findAll()) {
             System.out.println(order);
             for (RegisterOrderDetail registerOrderDetail : order.getDetails()) {
-                System.out.println(registerOrderDetail.getProduct().getName());
+                System.out.println();
+                long quantity = registerOrderDetail.getQuantity();
+                if (quantity!=1)
+                    System.out.println(registerOrderDetail.getProduct().getName() + " " + quantity);
             }
         }
     }
