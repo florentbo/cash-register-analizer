@@ -1,3 +1,4 @@
+/*
 package be.florentbo.register;
 
 import ch.vorburger.mariadb4j.DB;
@@ -12,3 +13,4 @@ public class MariaStart {
         db.source("dbbackup-full.sql","user","password","test");
     }
 }
+*/

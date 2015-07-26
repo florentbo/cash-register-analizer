@@ -17,7 +17,7 @@ public class RegisterApplication implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-        System.out.println("Orders found with findAll():");
+        /*System.out.println("Orders found with findAll():");
         System.out.println("-------------------------------");
         for (RegisterOrder order : registerOrderRepository.findAll()) {
             System.out.println(order);
@@ -27,7 +27,7 @@ public class RegisterApplication implements CommandLineRunner {
                 if (quantity!=1)
                     System.out.println(registerOrderDetail.getProduct().getName() + " " + quantity);
             }
-        }
+        }*/
     }
 
 }

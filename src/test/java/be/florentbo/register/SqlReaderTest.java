@@ -2,13 +2,11 @@ package be.florentbo.register;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
-import org.h2.jdbcx.JdbcConnectionPool;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
-import javax.sql.DataSource;
 import java.io.File;
-import java.sql.Connection;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,7 +16,7 @@ public class SqlReaderTest {
     public void setUp() throws Exception {
     }
 
-    @Test
+    @Test@Ignore
     public void test_parse_sql() throws Exception {
 
         ClassLoader classLoader = getClass().getClassLoader();
@@ -28,7 +26,7 @@ public class SqlReaderTest {
         assertThat(result).contains(expectedValue);
     }
 
-    @Test
+    /*@Test
     public void test_start_db() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource("dbbackup-small.sql").getFile());
@@ -39,5 +37,5 @@ public class SqlReaderTest {
         conn.createStatement().executeUpdate(result);
         conn.close();
 
-    }
+    }*/
 }
