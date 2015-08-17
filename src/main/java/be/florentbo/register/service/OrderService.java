@@ -22,6 +22,11 @@ public class OrderService {
         return registerOrders.stream().map(ro -> ro.getOrderTime().toLocalDate()).collect(Collectors.toSet());
     }
 
+    public Set<LocalDate> getDay(LocalDate localDate) {
+        Set<RegisterOrder> registerOrders = repository.findAll();
+        return registerOrders.stream().map(ro -> ro.getOrderTime().toLocalDate()).collect(Collectors.toSet());
+    }
+
     public boolean read(byte[] file) {
         return false;
     }

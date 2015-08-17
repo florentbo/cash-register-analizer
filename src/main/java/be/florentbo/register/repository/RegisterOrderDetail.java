@@ -7,15 +7,15 @@ import javax.persistence.*;
 public class RegisterOrderDetail {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
     private long id;
 
-    @ManyToOne(optional=false)
+    @ManyToOne(optional=false, fetch = FetchType.LAZY)
     @JoinColumn(name="orderid", nullable=false, updatable=false)
     private RegisterOrder registerOrder;
 
-    @ManyToOne(optional=false)
+    @ManyToOne(optional=false, fetch = FetchType.LAZY)
     @JoinColumn(name="productid", nullable=false, updatable=false)
     private Item product;
 

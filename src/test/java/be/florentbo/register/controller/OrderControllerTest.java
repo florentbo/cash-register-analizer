@@ -12,6 +12,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import static be.florentbo.register.controller.OrderController.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -43,16 +46,27 @@ public class OrderControllerTest {
         mockMvc.perform(get(ORDER_PATH))
                 .andExpect(status().isOk())
                 .andExpect(view().name(ORDER_VIEW));
-
     }
 
     @Test
     public void testOrderList() throws Exception {
-        /*when(orderServiceMock.getDays()).thenReturn("this is mock");*/
-        mockMvc.perform(get(REQUEST_MAPPING_ORDER_LIST))
+        mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(VIEW_ORDER_LIST));
         verify(orderServiceMock).getDays();
+        verifyNoMoreInteractions(orderServiceMock);
+    }
+
+    @Test
+    public void testOrdersByDayList() throws Exception {
+        String dateAsString = "2020-01-01";
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
+        LocalDate date = LocalDate.parse(dateAsString, formatter);
+
+        mockMvc.perform(get("/").param("date", dateAsString))
+                .andExpect(status().isOk())
+                .andExpect(view().name(VIEW_ORDER_DAY));
+        verify(orderServiceMock).getDay(date);
         verifyNoMoreInteractions(orderServiceMock);
     }
 }

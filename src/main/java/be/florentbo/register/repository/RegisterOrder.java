@@ -9,13 +9,13 @@ import java.util.Set;
 public class RegisterOrder {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="serial")
     private long id;
     @Column(name="ordertijd")
     private LocalDateTime orderTime;
 
-    @OneToMany(mappedBy="registerOrder", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="registerOrder", fetch=FetchType.LAZY)
     private Set<RegisterOrderDetail> details;
 
 
