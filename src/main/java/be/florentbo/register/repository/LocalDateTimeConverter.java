@@ -1,4 +1,4 @@
-package be.florentbo.register;
+package be.florentbo.register.repository;
 
 
 import javax.persistence.AttributeConverter;

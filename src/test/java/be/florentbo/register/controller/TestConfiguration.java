@@ -1,6 +1,6 @@
 package be.florentbo.register.controller;
 
-import be.florentbo.register.service.DumpService;
+import be.florentbo.register.service.OrderService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,12 +12,12 @@ import static org.mockito.Mockito.mock;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackageClasses = DumpController.class)
+@ComponentScan(basePackageClasses = OrderController.class)
 public class TestConfiguration {
 
     @Bean
-    public DumpService dumpService() {
-        return mock(DumpService.class);
+    public OrderService dumpService() {
+        return mock(OrderService.class);
     }
 
     /*@Bean

@@ -1,6 +1,6 @@
 package be.florentbo.register.controller;
 
-import be.florentbo.register.service.DumpService;
+import be.florentbo.register.service.OrderService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,16 +12,17 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.mockito.Mockito.when;
+import static be.florentbo.register.controller.OrderController.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = TestConfiguration.class)
-public class DumpControllerTest {
+public class OrderControllerTest {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -29,19 +30,29 @@ public class DumpControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private DumpService dumpServiceMock;
+    private OrderService orderServiceMock;
 
     @Before
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-        when(dumpServiceMock.test()).thenReturn("this is mock");
+
     }
 
     @Test
-    public void testDumpForm() throws Exception {
-        mockMvc.perform(get("/dump"))
+    public void testAddForm() throws Exception {
+        mockMvc.perform(get(ORDER_PATH))
                 .andExpect(status().isOk())
-                .andExpect(view().name(DumpController.DUMP_VIEW));
+                .andExpect(view().name(ORDER_VIEW));
 
+    }
+
+    @Test
+    public void testOrderList() throws Exception {
+        /*when(orderServiceMock.getDays()).thenReturn("this is mock");*/
+        mockMvc.perform(get(REQUEST_MAPPING_ORDER_LIST))
+                .andExpect(status().isOk())
+                .andExpect(view().name(VIEW_ORDER_LIST));
+        verify(orderServiceMock).getDays();
+        verifyNoMoreInteractions(orderServiceMock);
     }
 }

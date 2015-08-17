@@ -1,4 +1,4 @@
-package be.florentbo.register;
+package be.florentbo.register.repository;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -33,6 +33,10 @@ public class RegisterOrder {
         return details;
     }
 
+    public static Builder getBuilder(LocalDateTime orderTime) {
+        return new Builder(orderTime);
+    }
+
     @Override
     public String toString() {
         return "RegisterOrder{" +
@@ -40,6 +44,20 @@ public class RegisterOrder {
                 ", orderTime=" + orderTime +
                 //", details=" + details +
                 '}';
+    }
+
+    public static class Builder {
+
+        private RegisterOrder built;
+
+        public Builder(LocalDateTime orderTime) {
+            built = new RegisterOrder();
+            built.orderTime = orderTime;
+        }
+
+        public RegisterOrder build() {
+            return built;
+        }
     }
 }
 

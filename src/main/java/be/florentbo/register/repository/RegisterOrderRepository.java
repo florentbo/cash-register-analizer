@@ -1,4 +1,4 @@
-package be.florentbo.register;
+package be.florentbo.register.repository;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
