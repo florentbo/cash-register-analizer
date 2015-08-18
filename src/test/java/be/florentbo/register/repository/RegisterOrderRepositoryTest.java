@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,6 +30,8 @@ public class RegisterOrderRepositoryTest {
     public void findByDate(){
         LocalDate localDate = LocalDate.of(2015, 6, 26);
 
-        assertThat(repository.findByDate(Date.valueOf(localDate))).hasSize(2);
+        Set<RegisterOrder> registerOrders = repository.findByDate(Date.valueOf(localDate));
+        assertThat(registerOrders).hasSize(2);
+        registerOrders.forEach(order -> assertThat(order.getDetails()).isNotEmpty());
     }
 }
