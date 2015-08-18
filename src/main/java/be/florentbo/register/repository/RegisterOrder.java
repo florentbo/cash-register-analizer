@@ -12,12 +12,12 @@ public class RegisterOrder {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="serial")
     private long id;
+
     @Column(name="ordertijd")
     private LocalDateTime orderTime;
 
     @OneToMany(mappedBy="registerOrder", fetch=FetchType.LAZY)
     private Set<RegisterOrderDetail> details;
-
 
     protected RegisterOrder() {}
 
@@ -35,15 +35,6 @@ public class RegisterOrder {
 
     public static Builder getBuilder(LocalDateTime orderTime) {
         return new Builder(orderTime);
-    }
-
-    @Override
-    public String toString() {
-        return "RegisterOrder{" +
-                "id=" + id +
-                ", orderTime=" + orderTime +
-                //", details=" + details +
-                '}';
     }
 
     public static class Builder {

@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,5 +30,14 @@ public class OrderServiceTest {
         assertThat(days).hasSize(2);
         verify(repositoryMock).findAll();
 
+    }
+
+    @Test
+    public void testGetDay() throws Exception {
+        LocalDate localDate = LocalDate.of(2015, 6, 26);
+        when(repositoryMock.findByDate(any(Date.class))).thenReturn(Factory.create());
+        Set<LocalDate> days = service.getDay(localDate);
+        assertThat(days).hasSize(2);
+        verify(repositoryMock).findByDate(any(Date.class));
     }
 }

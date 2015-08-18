@@ -3,10 +3,9 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <body>
-
 <table>
     <tr th:each="day : ${days}">
-        <td th:text="${#temporals.format(day, 'dd/MMM/yyyy')}">1</td>
+        <td><a th:href="@{/orders/?date=} + ${#temporals.format(day, 'yyyy-MM-dd')}" th:text="${#temporals.format(day, 'dd/MMM/yyyy')}"/></td>
     </tr>
 </table>
 </body>

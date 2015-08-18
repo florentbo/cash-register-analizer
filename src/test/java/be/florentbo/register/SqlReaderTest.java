@@ -1,3 +1,4 @@
+/*
 package be.florentbo.register;
 
 import com.google.common.base.Charsets;
@@ -26,7 +27,8 @@ public class SqlReaderTest {
         assertThat(result).contains(expectedValue);
     }
 
-    /*@Test
+    */
+/*@Test
     public void test_start_db() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource("dbbackup-small.sql").getFile());
@@ -37,5 +39,6 @@ public class SqlReaderTest {
         conn.createStatement().executeUpdate(result);
         conn.close();
 
-    }*/
-}
+    }*//*
+
+}*/

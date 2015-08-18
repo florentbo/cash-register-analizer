@@ -18,9 +18,10 @@ import java.time.LocalDate;
 import java.util.TreeSet;
 
 @Controller
+@RequestMapping(value= OrderController.REQUEST_MAPPING_ORDER_LIST)
 public class OrderController {
     protected static final String ORDER_PATH = "/new";
-    protected static final String REQUEST_MAPPING_ORDER_LIST = "/";
+    protected static final String REQUEST_MAPPING_ORDER_LIST = "/orders";
 
     public static final String ORDER_VIEW = "add";
     protected static final String VIEW_ORDER_LIST = "order/list";
@@ -37,13 +38,13 @@ public class OrderController {
         return ORDER_VIEW;
     }
 
-    @RequestMapping(value= REQUEST_MAPPING_ORDER_LIST, method=RequestMethod.GET)
+    @RequestMapping(method=RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("days", new TreeSet<>(orderService.getDays()));
         return VIEW_ORDER_LIST;
     }
 
-    @RequestMapping(value= REQUEST_MAPPING_ORDER_LIST, method=RequestMethod.GET, params="date")
+    @RequestMapping(method=RequestMethod.GET, params="date")
     public String search(
             Model model,
             @RequestParam(value = "date", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date)

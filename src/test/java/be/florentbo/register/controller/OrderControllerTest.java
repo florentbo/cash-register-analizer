@@ -43,14 +43,14 @@ public class OrderControllerTest {
 
     @Test
     public void testAddForm() throws Exception {
-        mockMvc.perform(get(ORDER_PATH))
+        mockMvc.perform(get("/orders/new"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(ORDER_VIEW));
     }
 
     @Test
     public void testOrderList() throws Exception {
-        mockMvc.perform(get("/"))
+        mockMvc.perform(get("/orders"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(VIEW_ORDER_LIST));
         verify(orderServiceMock).getDays();
@@ -59,11 +59,12 @@ public class OrderControllerTest {
 
     @Test
     public void testOrdersByDayList() throws Exception {
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++");
         String dateAsString = "2020-01-01";
         DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
         LocalDate date = LocalDate.parse(dateAsString, formatter);
 
-        mockMvc.perform(get("/").param("date", dateAsString))
+        mockMvc.perform(get("/orders").param("date", dateAsString))
                 .andExpect(status().isOk())
                 .andExpect(view().name(VIEW_ORDER_DAY));
         verify(orderServiceMock).getDay(date);
