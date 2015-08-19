@@ -17,5 +17,23 @@ public class Item {
     public String getName() {
         return name;
     }
+
+    public static Builder getBuilder(String itemName) {
+        return new Builder(itemName);
+    }
+
+    public static class Builder {
+
+        private Item built;
+
+        public Builder(String itemName) {
+            built = new Item();
+            built.name = itemName;
+        }
+
+        public Item build() {
+            return built;
+        }
+    }
 }
 

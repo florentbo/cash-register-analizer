@@ -13,7 +13,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import static be.florentbo.register.controller.OrderController.*;
 import static org.mockito.Mockito.verify;
@@ -59,14 +58,12 @@ public class OrderControllerTest {
 
     @Test
     public void testOrdersByDayList() throws Exception {
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++");
         String dateAsString = "2020-01-01";
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
-        LocalDate date = LocalDate.parse(dateAsString, formatter);
 
-        mockMvc.perform(get("/orders").param("date", dateAsString))
+        mockMvc.perform(get("/orders/?date="+dateAsString))
                 .andExpect(status().isOk())
                 .andExpect(view().name(VIEW_ORDER_DAY));
+        LocalDate date = LocalDate.of(2020,1,1);
         verify(orderServiceMock).getDay(date);
         verifyNoMoreInteractions(orderServiceMock);
     }

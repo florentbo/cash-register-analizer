@@ -20,7 +20,7 @@ public class RegisterOrderDetail {
     private Item product;
 
     @Column(name="aantal")
-    private long quantity;
+    private int quantity;
 
     public RegisterOrder getRegisterOrder() {
         return registerOrder;
@@ -30,8 +30,27 @@ public class RegisterOrderDetail {
         return product;
     }
 
-    public long getQuantity() {
+    public int getQuantity() {
         return quantity;
+    }
+
+    public static Builder getBuilder(String product, int quantity) {
+        return new Builder(product,quantity);
+    }
+
+    public static class Builder {
+
+        private RegisterOrderDetail built;
+
+        public Builder(String productName, int quantity) {
+            built = new RegisterOrderDetail();
+            built.product = Item.getBuilder(productName).build();
+            built.quantity = quantity;
+        }
+
+        public RegisterOrderDetail build() {
+            return built;
+        }
     }
 }
 

@@ -10,6 +10,8 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 
 import javax.annotation.PostConstruct;
 
+import static be.florentbo.register.service.OrderService.*;
+
 @Configuration
 public class BusinessConfiguration {
 
@@ -18,7 +20,7 @@ public class BusinessConfiguration {
 
     @Bean
     public OrderService dumpService(){
-        return new OrderService(repository);
+        return new OrderService(repository, new RegisterOrderMapper(), new RegisterOrderDetailMapper());
     }
 
     @Autowired

@@ -49,7 +49,6 @@
             <version>5.0.0.CR4</version>
         </dependency>
 
-
         <!--<dependency>
             <groupId>ch.vorburger.mariaDB4j</groupId>
             <artifactId>mariaDB4j</artifactId>
@@ -74,6 +73,7 @@
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
             <version>3.2.1</version>
+
         </dependency>-->
 
         <!--<dependency>
@@ -82,11 +82,6 @@
             <version>1.1.9</version>
         </dependency>-->
 
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>18.0</version>
-        </dependency>
 
         <dependency>
             <groupId>junit</groupId>
@@ -116,7 +111,6 @@
             <version>1.4.187</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>

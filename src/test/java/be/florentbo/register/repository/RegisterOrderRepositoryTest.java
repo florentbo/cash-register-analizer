@@ -30,8 +30,7 @@ public class RegisterOrderRepositoryTest {
     public void findByDate(){
         LocalDate localDate = LocalDate.of(2015, 6, 26);
 
-        Set<RegisterOrder> registerOrders = repository.findByDate(Date.valueOf(localDate));
-        assertThat(registerOrders).hasSize(2);
-        registerOrders.forEach(order -> assertThat(order.getDetails()).isNotEmpty());
+        Set<RegisterOrderDetail> registerOrders = repository.findByDate(Date.valueOf(localDate));
+        assertThat(registerOrders).hasSize(3);
     }
 }

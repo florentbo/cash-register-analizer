@@ -34,7 +34,7 @@ public class SqlReaderTest {
         File file = new File(classLoader.getResource("dbbackup-small.sql").getFile());
         String result = Files.toString(file, Charsets.UTF_8);
 
-        DataSource ds = JdbcConnectionPool.create("jdbc:h2:mem:test;MODE=MYSQL;DB_CLOSE_DELAY=-1", "user", "password");
+        DataSource ds = JdbcConnectionPool.createRegisterOrders("jdbc:h2:mem:test;MODE=MYSQL;DB_CLOSE_DELAY=-1", "user", "password");
         Connection conn = ds.getConnection();
         conn.createStatement().executeUpdate(result);
         conn.close();
