@@ -1,1 +1,13 @@
-Hello day
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<body>
+<table border="1">
+    <tr th:each="article : ${day}">
+        <td th:text="${article.key}">key</td>
+        <td th:text="${article.value}">vfd</td>
+    </tr>
+</table>
+</body>
+</html>
