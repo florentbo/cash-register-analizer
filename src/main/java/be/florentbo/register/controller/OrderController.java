@@ -21,10 +21,15 @@ import java.util.TreeSet;
 @RequestMapping(value= OrderController.REQUEST_MAPPING_ORDER_LIST)
 public class OrderController {
     protected static final String ORDER_PATH = "/new";
-    protected static final String REQUEST_MAPPING_ORDER_LIST = "/orders";
+    protected static final String ORDER_VIEW = "add";
 
-    public static final String ORDER_VIEW = "add";
+    protected static final String REQUEST_MAPPING_ORDER_LIST = "/orders";
     protected static final String VIEW_ORDER_LIST = "order/list";
+
+    protected static final String REQUEST_MAPPING_DATES_SELECTION = "/select";
+    protected static final String VIEW_DATES_SELECTION = "order/select";
+
+
     protected static final String VIEW_ORDER_DAY = "order/day";
     private OrderService orderService;
 
@@ -36,6 +41,11 @@ public class OrderController {
     @RequestMapping(value= ORDER_PATH, method=RequestMethod.GET)
     public String addForm() {
         return ORDER_VIEW;
+    }
+
+    @RequestMapping(value= REQUEST_MAPPING_DATES_SELECTION, method=RequestMethod.GET)
+    public String selectForm() {
+        return VIEW_DATES_SELECTION;
     }
 
     @RequestMapping(method=RequestMethod.GET)
@@ -71,5 +81,4 @@ public class OrderController {
             return "You failed to upload " + name + " because the file was empty.";
         }
     }
-
 }

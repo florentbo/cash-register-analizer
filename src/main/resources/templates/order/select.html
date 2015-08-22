@@ -1,0 +1,53 @@
+<!doctype html>
+<html ng-app="ui.bootstrap.demo">
+
+<head>
+    <script src="../js/angular-bootstrap.js" type="text/javascript"></script>
+    <script src="../js/date.js"></script>
+    <link href="../css/angular-bootstrap.css" rel="stylesheet"/>
+</head>
+
+<body>
+<div style="padding: 0px 15px" ng-controller="DatepickerDemoCtrl">
+    <div class="row">
+        <div class="center-block col-md-4" style="float: none;">
+            <form method="GET" action="/search">
+
+                <h4>Create report by dates</h4>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="input-group">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt1"
+                                   is-open="opened1" min-date="minDate" max-date="'2020-06-22'"
+                                   datepicker-options="dateOptions"
+                                   date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event,'opened1')"><i
+                        class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+                        </p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <p class="input-group">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt2"
+                                   is-open="opened2" min-date="minDate" max-date="'2020-06-22'"
+                                   datepicker-options="dateOptions"
+                                   date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event,'opened2')"><i
+                        class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+                        </p>
+                    </div>
+                </div>
+                <input type="submit" value="Create" class="btn btn-sm btn-info pull-right"/>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

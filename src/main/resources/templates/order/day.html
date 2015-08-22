@@ -5,8 +5,8 @@
 <body>
 <table border="1">
     <tr th:each="article : ${day}">
-        <td th:text="${article.key}">key</td>
-        <td th:text="${article.value}">vfd</td>
+        <td th:text="${article.key}">article name</td>
+        <td th:text="${article.value}">article quantity</td>
     </tr>
 </table>
 </body>
