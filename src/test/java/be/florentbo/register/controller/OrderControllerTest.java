@@ -15,11 +15,12 @@ import org.springframework.web.context.WebApplicationContext;
 import java.time.LocalDate;
 
 import static be.florentbo.register.controller.OrderController.*;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -37,7 +38,6 @@ public class OrderControllerTest {
     @Before
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-
     }
 
     @Test
@@ -66,5 +66,25 @@ public class OrderControllerTest {
         LocalDate date = LocalDate.of(2020,1,1);
         verify(orderServiceMock).getDay(date);
         verifyNoMoreInteractions(orderServiceMock);
+    }
+
+    @Test
+    public void test_search_orders_by_day_view() throws Exception {
+        mockMvc.perform(get("/orders/search"))
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("dates", notNullValue()))
+                .andExpect(view().name(VIEW_SEARCH_BY_DATES));
+    }
+
+    @Test
+    public void test_search_orders_by_day_form() throws Exception {
+        mockMvc.perform(get("/orders/search").param("startDate","05/08/2015").param("endDate","15/08/2015"))
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("report", notNullValue()))
+                .andExpect(view().name(VIEW_SEARCH_BY_DATES))
+        ;
+        LocalDate startDate = LocalDate.of(2015,8,5);
+        LocalDate endDate = LocalDate.of(2015,8,15);
+        verify(orderServiceMock).find(startDate,endDate);
     }
 }

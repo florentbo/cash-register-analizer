@@ -21,16 +21,8 @@ public class RegisterOrder {
 
     protected RegisterOrder() {}
 
-    public long getId() {
-        return id;
-    }
-
     public LocalDateTime getOrderTime() {
         return orderTime;
-    }
-
-    public Set<RegisterOrderDetail> getDetails() {
-        return details;
     }
 
     public static Builder getBuilder(LocalDateTime orderTime) {

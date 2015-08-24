@@ -12,6 +12,13 @@ public interface RegisterOrderRepository extends CrudRepository<RegisterOrder, L
 
     Set<RegisterOrder> findAll();
 
-    @Query("SELECT rod FROM RegisterOrderDetail rod JOIN FETCH rod.registerOrder ro WHERE CAST(ro.orderTime as date) = :date")
-    Set<RegisterOrderDetail> findByDate(@Param("date") Date date);
+    @Query("SELECT rod FROM RegisterOrderDetail rod " +
+                                                    "JOIN FETCH rod.registerOrder ro " +
+                                                    "WHERE CAST(ro.orderTime as date) = :date")
+    Set<RegisterOrderDetail> find(@Param("date") Date date);
+
+    @Query("SELECT rod FROM RegisterOrderDetail rod " +
+                                "JOIN FETCH rod.registerOrder ro " +
+                                "WHERE CAST(ro.orderTime as date) BETWEEN :startDate AND :endDate")
+    Set<RegisterOrderDetail> find(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 }

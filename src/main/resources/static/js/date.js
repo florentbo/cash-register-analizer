@@ -1,15 +1,5 @@
 angular.module('ui.bootstrap.demo', ['ngAnimate', 'ui.bootstrap']);
 angular.module('ui.bootstrap.demo').controller('DatepickerDemoCtrl', function ($scope) {
-    $scope.today = function() {
-        $scope.dt1 = new Date();
-        $scope.dt2 = new Date();
-    };
-    $scope.today();
-
-    $scope.clear = function () {
-        $scope.dt1 = null;
-        $scope.dt2 = null;
-    };
 
     $scope.open = function($event,opened) {
         $event.preventDefault();

@@ -34,17 +34,21 @@ public class OrderService {
     }
 
     public Map<String,Integer> getDay(LocalDate localDate) {
-        return toDay.apply(repository.findByDate(Date.valueOf(localDate)));
+        return toDay.apply(repository.find(Date.valueOf(localDate)));
+    }
+
+    public Map<String,Integer> find(LocalDate startDate, LocalDate endDate) {
+        return toDay.apply(repository.find(Date.valueOf(startDate), Date.valueOf(endDate)));
     }
 
 
-    public boolean read(byte[] file) {
+    /*public boolean read(byte[] file) {
         return false;
     }
 
     public String test() {
         return "not mock";
-    }
+    }*/
 
     public static class RegisterOrderMapper implements Function<Set<RegisterOrder>,Set<LocalDate>>{
         @Override

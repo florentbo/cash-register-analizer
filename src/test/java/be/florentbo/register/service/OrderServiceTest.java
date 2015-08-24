@@ -22,6 +22,7 @@ import static org.mockito.Mockito.*;
 
 public class OrderServiceTest {
 
+    public static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
     private OrderService service;
     private RegisterOrderRepository repositoryMock;
     private Function<Set<RegisterOrder>,Set<LocalDate>> toLocalDatesMock;
@@ -59,7 +60,7 @@ public class OrderServiceTest {
         Map<String, Integer> day = service.getDay(localDate);
         assertThat(day).hasSize(createDay().size());
 
-        verify(repositoryMock).findByDate(date);
+        verify(repositoryMock).find(date);
         verifyNoMoreInteractions(repositoryMock);
         verify(toDayMock).apply(anySet());
         verifyNoMoreInteractions(toDayMock);
@@ -73,6 +74,25 @@ public class OrderServiceTest {
         Set<LocalDate> localDates = mapper.apply(registerOrders);
         assertThat(registerOrders).hasSize(3);
         assertThat(localDates).hasSize(2);
+    }
+
+    @Test
+    public void find() throws Exception {
+        LocalDate localStartDate = LocalDate.of(2015, 6, 26);
+        Date startDate = SIMPLE_DATE_FORMAT.parse("26/6/2015");
+
+        LocalDate localEndDate = LocalDate.of(2015, 6, 27);
+        Date endDate = SIMPLE_DATE_FORMAT.parse("27/6/2015");
+
+        when(toDayMock.apply(anySet())).thenReturn(createDay());
+
+        Map<String, Integer> day = service.find(localStartDate, localEndDate);
+        assertThat(day).hasSize(createDay().size());
+
+        verify(repositoryMock).find(startDate,endDate);
+        verifyNoMoreInteractions(repositoryMock);
+        verify(toDayMock).apply(anySet());
+        verifyNoMoreInteractions(toDayMock);
     }
 
     @Test

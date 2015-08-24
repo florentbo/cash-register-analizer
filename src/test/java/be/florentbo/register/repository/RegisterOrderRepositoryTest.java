@@ -23,14 +23,23 @@ public class RegisterOrderRepositoryTest {
 
     @Test
     public void testFindAll(){
-        assertThat(repository.findAll()).hasSize(3);
+        assertThat(repository.findAll()).hasSize(4);
     }
 
     @Test
     public void findByDate(){
         LocalDate localDate = LocalDate.of(2015, 6, 26);
 
-        Set<RegisterOrderDetail> registerOrders = repository.findByDate(Date.valueOf(localDate));
+        Set<RegisterOrderDetail> registerOrders = repository.find(Date.valueOf(localDate));
         assertThat(registerOrders).hasSize(3);
+    }
+
+    @Test
+    public void findBetweenTowDates(){
+        LocalDate startDate = LocalDate.of(2015, 6, 23);
+        LocalDate endDate = LocalDate.of(2015, 6, 26);
+
+        Set<RegisterOrderDetail> registerOrders = repository.find(Date.valueOf(startDate), Date.valueOf(endDate));
+        assertThat(registerOrders).hasSize(6);
     }
 }

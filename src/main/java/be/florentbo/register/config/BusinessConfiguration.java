@@ -19,7 +19,7 @@ public class BusinessConfiguration {
     private RegisterOrderRepository repository;
 
     @Bean
-    public OrderService dumpService(){
+    public OrderService orderService(){
         return new OrderService(repository, new RegisterOrderMapper(), new RegisterOrderDetailMapper());
     }
 

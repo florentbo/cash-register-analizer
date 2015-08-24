@@ -22,10 +22,6 @@ public class RegisterOrderDetail {
     @Column(name="aantal")
     private int quantity;
 
-    public RegisterOrder getRegisterOrder() {
-        return registerOrder;
-    }
-
     public Item getProduct() {
         return product;
     }
