@@ -81,10 +81,25 @@ public class OrderControllerTest {
         mockMvc.perform(get("/orders/search").param("startDate","05/08/2015").param("endDate","15/08/2015"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("report", notNullValue()))
-                .andExpect(view().name(VIEW_SEARCH_BY_DATES))
-        ;
+                .andExpect(model().attribute("reportQueryParam", notNullValue()))
+                .andExpect(view().name(VIEW_SEARCH_BY_DATES));
+
         LocalDate startDate = LocalDate.of(2015,8,5);
         LocalDate endDate = LocalDate.of(2015,8,15);
-        verify(orderServiceMock).find(startDate,endDate);
+        verify(orderServiceMock).find(startDate, endDate);
+        verifyNoMoreInteractions(orderServiceMock);
+    }
+
+    @Test
+    public void test_search_orders_by_day_report() throws Exception {
+        //String query = "orderDate >= 05/08/2015 and orderDate <= 15/08/2015";
+
+        mockMvc.perform(get("/orders/report/?query=orderDate+%26gt%3B%3D+05%2F08%2F2015+and+orderDate+%26lt%3B%3D+15%2F08%2F2015"))
+                        .andExpect(status().isOk());
+
+        LocalDate startDate = LocalDate.of(2015,8,5);
+        LocalDate endDate = LocalDate.of(2015,8,15);
+        verify(orderServiceMock).print(startDate, endDate);
+        verifyNoMoreInteractions(orderServiceMock);
     }
 }

@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.TreeSet;
 
 @Controller
@@ -27,6 +30,10 @@ public class OrderController {
 
 
     protected static final String VIEW_ORDER_DAY = "order/day";
+    private static final String GREATER_THAN_OR_EQUAL_TO = ">=";
+    private static final String LESS_THAN_OR_EQUAL_TO = "<=";
+    private static final String AND = "and";
+    private static final String ORDER_DATE_PARAMETER = "orderDate";
     private OrderService orderService;
 
     @Autowired
@@ -60,9 +67,22 @@ public class OrderController {
     }
 
     @RequestMapping(value = REQUEST_MAPPING_DATES_SELECTION, method = RequestMethod.GET, params = {"startDate","endDate"})
-    public String search(@ModelAttribute Dates dates, Model model) {
-        model.addAttribute("report", orderService.find(dates.getStartDate(),dates.getEndDate()));
+    public String search(@ModelAttribute Dates dates, Model model) throws UnsupportedEncodingException {
+        model.addAttribute("report", orderService.find(dates.getStartDate(), dates.getEndDate()));
+        String queryParam = QueryBuilder.newBuilder()
+                                        .where(ORDER_DATE_PARAMETER)
+                                        .orderedBetween(dates.getStartDate(), dates.getEndDate())
+                                        .toEncodedAndEscapedParam();
+        model.addAttribute("reportQueryParam", queryParam);
+
         return VIEW_SEARCH_BY_DATES;
+    }
+
+    @RequestMapping(value = "/report", method=RequestMethod.GET, params = "query")
+    public ModelAndView print(@RequestParam(value = "query", required = true) String queryParam) throws UnsupportedEncodingException {
+        QueryBuilder.Dates dates = QueryBuilder.newBuilder().ofEncodedAndEscapedParam(queryParam);
+        Map<String, Integer> report = orderService.print(dates.getStartDate(), dates.getEndDate());
+        return new ModelAndView(new ExcelBuilder(report));
     }
 
     /*@RequestMapping(value = ORDER_PATH, method = RequestMethod.POST)

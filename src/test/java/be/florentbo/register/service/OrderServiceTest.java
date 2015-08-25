@@ -1,5 +1,6 @@
 package be.florentbo.register.service;
 
+import be.florentbo.register.Format;
 import be.florentbo.register.repository.RegisterOrder;
 import be.florentbo.register.repository.RegisterOrderDetail;
 import be.florentbo.register.repository.RegisterOrderRepository;
@@ -22,7 +23,7 @@ import static org.mockito.Mockito.*;
 
 public class OrderServiceTest {
 
-    public static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
+    public static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat(Format.DATE_FORMAT_PATTERN);
     private OrderService service;
     private RegisterOrderRepository repositoryMock;
     private Function<Set<RegisterOrder>,Set<LocalDate>> toLocalDatesMock;
@@ -54,7 +55,7 @@ public class OrderServiceTest {
     @Test
     public void getDay() throws Exception {
         LocalDate localDate = LocalDate.of(2015, 6, 26);
-        Date date = new SimpleDateFormat("dd/MM/yyyy").parse("26/6/2015");
+        Date date = new SimpleDateFormat(Format.DATE_FORMAT_PATTERN).parse("26/6/2015");
         when(toDayMock.apply(anySet())).thenReturn(createDay());
 
         Map<String, Integer> day = service.getDay(localDate);

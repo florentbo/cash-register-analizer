@@ -41,6 +41,10 @@ public class OrderService {
         return toDay.apply(repository.find(Date.valueOf(startDate), Date.valueOf(endDate)));
     }
 
+    public Map<String,Integer> print(LocalDate startDate, LocalDate endDate) {
+        return find(startDate,endDate);
+    }
+
 
     /*public boolean read(byte[] file) {
         return false;

@@ -46,9 +46,10 @@
                         </p>
                     </div>
                 </div>
-                <input type="submit" value="Create" class="btn btn-sm btn-info pull-right"/>
+                <div class="row">
+                    <input type="submit" value="Create" class="btn btn-sm btn-info pull-right"/>
+                </div>
             </form>
-
         </div>
     </div>
 </div>
@@ -62,7 +63,9 @@
             </tr>
         </table>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-1" th:if="${reportQueryParam}">
+        <a th:href="@{/orders/report/?query=}+${reportQueryParam}"
+           class="btn btn-sm btn-info pull-right" role="button">Download</a>
     </div>
 </div>
 

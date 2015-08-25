@@ -35,6 +35,5 @@ public class BusinessConfigurationTest {
     @Test
     public void testExtension() throws Exception {
         assertThat(templateEngine.getDialects()).hasAtLeastOneElementOfType(Java8TimeDialect.class);
-
     }
 }
