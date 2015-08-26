@@ -19,6 +19,7 @@ import java.util.TreeSet;
 @Controller
 @RequestMapping(value = OrderController.REQUEST_MAPPING_ORDER_LIST)
 public class OrderController {
+
     protected static final String ORDER_PATH = "/new";
     protected static final String ORDER_VIEW = "add";
 
@@ -28,12 +29,9 @@ public class OrderController {
     protected static final String REQUEST_MAPPING_DATES_SELECTION = "/search";
     protected static final String VIEW_SEARCH_BY_DATES = "order/search";
 
-
     protected static final String VIEW_ORDER_DAY = "order/day";
-    private static final String GREATER_THAN_OR_EQUAL_TO = ">=";
-    private static final String LESS_THAN_OR_EQUAL_TO = "<=";
-    private static final String AND = "and";
     private static final String ORDER_DATE_PARAMETER = "orderDate";
+
     private OrderService orderService;
 
     @Autowired
