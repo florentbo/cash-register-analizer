@@ -1,3 +1,4 @@
+/*
 package be.florentbo.register.service;
 
 import org.junit.Test;
@@ -46,3 +47,4 @@ public class ITOrderServiceTest {
 
     }
 }
+*/

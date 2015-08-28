@@ -1,3 +1,4 @@
+/*
 package be.florentbo.register.config;
 
 import be.florentbo.register.RegisterApplication;
@@ -36,4 +37,4 @@ public class BusinessConfigurationTest {
     public void testExtension() throws Exception {
         assertThat(templateEngine.getDialects()).hasAtLeastOneElementOfType(Java8TimeDialect.class);
     }
-}
+}*/
