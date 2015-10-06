@@ -3,14 +3,14 @@ package be.florentbo.register.controller;
 import be.florentbo.register.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.util.Map;
@@ -21,7 +21,7 @@ import java.util.TreeSet;
 public class OrderController {
 
     protected static final String ORDER_PATH = "/new";
-    protected static final String ORDER_VIEW = "add";
+    protected static final String ORDER_VIEW = "order/add";
 
     protected static final String REQUEST_MAPPING_ORDER_LIST = "/orders";
     protected static final String VIEW_ORDER_LIST = "order/list";
@@ -31,6 +31,7 @@ public class OrderController {
 
     protected static final String VIEW_ORDER_DAY = "order/day";
     private static final String ORDER_DATE_PARAMETER = "orderDate";
+
 
     private OrderService orderService;
 
@@ -81,6 +82,24 @@ public class OrderController {
         QueryBuilder.Dates dates = QueryBuilder.newBuilder().ofEncodedAndEscapedParam(queryParam);
         Map<String, Integer> report = orderService.print(dates.getStartDate(), dates.getEndDate());
         return new ModelAndView(new ExcelBuilder(report));
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public void upload(@RequestParam("file") MultipartFile file ) throws IOException {
+
+        byte[] bytes;
+
+        if (!file.isEmpty()) {
+            bytes = file.getBytes();
+            orderService.add(file.getInputStream());
+            //String content = new String(Files.readAllBytes(Paths.get("duke.java")));
+            String content = new String(bytes);
+            System.out.println(content);
+            //store file in storage
+        }
+
+        System.out.println(String.format("receive %s", file.getOriginalFilename()));
     }
 
     /*@RequestMapping(value = ORDER_PATH, method = RequestMethod.POST)

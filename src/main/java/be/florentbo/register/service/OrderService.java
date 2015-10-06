@@ -6,6 +6,7 @@ import be.florentbo.register.repository.RegisterOrderDetail;
 import be.florentbo.register.repository.RegisterOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.InputStream;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Map;
@@ -19,6 +20,7 @@ public class OrderService {
     private final RegisterOrderRepository repository;
     private final Function<Set<RegisterOrder>,Set<LocalDate>> toLocalDates;
     private final Function<Set<RegisterOrderDetail>, Map<String,Integer>> toDay;
+    private Function<InputStream, String> toSql;
 
     @Autowired
     public OrderService(RegisterOrderRepository repository,
@@ -45,10 +47,11 @@ public class OrderService {
         return find(startDate,endDate);
     }
 
-
-    /*public boolean read(byte[] file) {
+    public boolean add(InputStream inputStream) {
         return false;
     }
+
+    /*
 
     public String test() {
         return "not mock";

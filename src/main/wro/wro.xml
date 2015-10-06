@@ -7,4 +7,9 @@
         <js>webjar:angularjs/1.4.3/angular-animate.min.js</js>
         <js>webjar:angular-ui-bootstrap-bower/0.13.3/ui-bootstrap-tpls.min.js</js>
     </group>
+
+    <group name="angular-upload">
+        <js>webjar:angularjs/1.4.3/angular.min.js</js>
+        <js>webjar:angular-file-upload/4.2.4/ng-file-upload.min.js</js>
+    </group>
 </groups>
